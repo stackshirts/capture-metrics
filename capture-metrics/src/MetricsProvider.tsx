@@ -1,35 +1,32 @@
 import React, { createContext, useRef } from 'react';
-import { AnalyticsType, MetricsRef, MetricsType } from 'src/types';
+import { AnalyticsType, MetricsType } from 'src/types';
 
 const voidAnalytics = {
   page: () => undefined,
   track: () => undefined,
 }
 
-export const MetricsContext = createContext<MetricsRef>({
-  // 👇 supposed to look like a ref object
-  current: {
-    properties: {},
-    analytics: voidAnalytics
-  }
+export const MetricsContext = createContext<MetricsType>({
+  // it's supposed to look like a ref object
+  properties: {},
+  analytics: voidAnalytics,
+  ready: true,
 });
 
+// this is different from MetricsType
 interface Props {
   analytics: AnalyticsType;
   properties?: any;
+  ready?: boolean;
 }
 
 const MetricsProvider: React.FC<Props> = (props) => {
   const {
     children,
     analytics,
-    properties = {}
+    properties = {},
+    ready = true,
   } = props
-
-  const metrics = { analytics, properties }
-  const ref = useRef<MetricsType>(metrics)
-  Object.assign(ref.current.analytics, metrics.analytics);
-  Object.assign(ref.current.properties, metrics.properties);
 
   if (!analytics) {
     throw new Error('The "analytics" prop must be passed to MetricsProvider');
@@ -41,9 +38,18 @@ const MetricsProvider: React.FC<Props> = (props) => {
     throw new Error('Your "analytics" API should have a "track" method');
   }
 
+  const metrics = { analytics, properties, ready }
+  const ref = useRef<MetricsType>(metrics)
+  Object.assign(ref.current, metrics);
+  if (ready !== ref.current.ready) {
+    ref.current = {
+      ...ref.current,
+      ready,
+    }
+  }
 
   return (
-    <MetricsContext.Provider value={ref}>
+    <MetricsContext.Provider value={ref.current}>
       {children}
     </MetricsContext.Provider>
   );

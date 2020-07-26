@@ -9,6 +9,7 @@
       "dom.iterable",
       "esnext"
     ],
+    "inlineSourceMap": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "noEmitOnError": true,
@@ -27,12 +28,12 @@
       "node",
       "jest"
     ],
-    "baseUrl": "."
+    "baseUrl": "./"
   },
   "exclude": [
     "**/*.test.tsx"
   ],
   "include": [
-    "src/**/*"
+    "src"
   ]
 }
