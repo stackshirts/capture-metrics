@@ -5,3 +5,5 @@ export {
   MetricsProvider,
   useMetrics
 };
+
+export * from './types';

@@ -1,24 +1,5 @@
-import React, { createContext, MutableRefObject, useRef } from 'react';
-
-export interface Track {
-  (name: string, properties?: object): any;
-}
-
-export interface Page {
-  (name: string, properties?: object, category?: string): any;
-}
-
-export interface AnalyticsType {
-  track: Track;
-  page: Page;
-}
-
-export interface MetricsType {
-  properties: object,
-  analytics: AnalyticsType,
-}
-
-export type MetricsRef = MutableRefObject<MetricsType>
+import React, { createContext, useRef } from 'react';
+import { AnalyticsType, MetricsRef, MetricsType } from 'src/types';
 
 const voidAnalytics = {
   page: () => undefined,

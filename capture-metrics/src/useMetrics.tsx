@@ -1,17 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { AnalyticsType, MetricsContext, MetricsType } from './MetricsProvider';
-
-export interface PageViewProps {
-  name: string;
-  category?: string;
-  properties?: object;
-  pageKey?: string | number;
-  ready?: boolean;
-}
-
-interface PageViewInstanceProps extends PageViewProps {
-  analytics: AnalyticsType
-}
+import { MetricsContext } from './MetricsProvider';
+import { AnalyticsType, MetricsType, PageViewInstanceProps, PageViewProps } from 'src/types';
 
 const PageView: React.FC<PageViewInstanceProps> = (props) => {
 
