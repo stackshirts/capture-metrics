@@ -15,6 +15,16 @@
 </p>
 
 
+Table of Contents:
+- [Example](https://codesandbox.io/s/github/stackshirts/capture-metrics/tree/master/examples/with-nextjs)
+- [Quick Start](#Quick Start)
+- [Mount MetricsProvider](#Mount MetricsProvider)
+- [useMetrics](#useMetrics)
+    - [PageView](#PageView)
+    - [Capture](#Capture)
+    - [analytics](#analytics)
+
+
 ## Introduction
 
 The `capture-metrics` package is a small **react** library to help pass properties to your analytics via context.
