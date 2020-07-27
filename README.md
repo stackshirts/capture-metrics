@@ -1,4 +1,4 @@
-# `react-capture-metrics`
+`react-capture-metrics`
 
 <br />
 
@@ -18,11 +18,11 @@
 ## Table of Contents:
 - [Introduction](#introduction)
 - [Example](https://codesandbox.io/s/github/stackshirts/react-capture-metrics/tree/master/examples/with-nextjs)
-- [Quick Start](#Quick Start)
-- [Mount MetricsProvider](#Mount MetricsProvider)
-- [useMetrics](#useMetrics)
-    - [PageView](#PageView)
-    - [Capture](#Capture)
+- [Quick Start](#quick-start)
+- [Mount MetricsProvider](#mount-metricsprovider)
+- [useMetrics](#usemetrics)
+    - [PageView](#pageview)
+    - [Capture](#capture)
     - [analytics](#analytics)
 
 
