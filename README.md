@@ -1,5 +1,6 @@
-# capture-metrics
+# `capture-metrics`
 
+<br />
 
 <p align="center">
   <a aria-label="NPM version" href="https://www.npmjs.com/package/captuer-metrics">
@@ -16,9 +17,9 @@
 
 ## Introduction
 
-`capture-metrics` is a small **react** library to help pass properties to your analytics via context.
+The `capture-metrics` package is a small **react** library to help pass properties to your analytics via context.
 
-The problem it solves is probably best demonstrated in an example. (Or check out the [Code Sandbox](https://www.google.com))
+The problem it solves is probably best demonstrated in an example. (Or check out the [Code Sandbox](https://codesandbox.io/s/github/stackshirts/capture-metrics/tree/master/examples/with-nextjs))
 
 ```javascript
   // Deep down at the most granular level of your react app
@@ -64,7 +65,7 @@ Then in your `button` you only have to call:
 ```
 
 ## Example
-[Code Sandbox](https://www.google.com)
+[Code Sandbox](https://codesandbox.io/s/github/stackshirts/capture-metrics/tree/master/examples/with-nextjs)
 
 ## Quick Start
 
