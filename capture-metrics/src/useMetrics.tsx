@@ -92,6 +92,7 @@ export default function useMetrics(hookProps: object = {}, config: Config = {}) 
       name,
       category,
       properties, // even more properties can be put on <PageView />
+      ready,
     } = props
 
     Object.assign(pvRef.current.properties, {
@@ -101,7 +102,7 @@ export default function useMetrics(hookProps: object = {}, config: Config = {}) 
     });
 
     return (
-      <PageView ready={metrics.ready} analytics={capturedAnalytics} {...props}>
+      <PageView ready={metrics.ready && ready} analytics={capturedAnalytics} {...props}>
         <MetricsContext.Provider value={pvRef.current}>
           {children}
         </MetricsContext.Provider>
