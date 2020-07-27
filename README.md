@@ -16,7 +16,7 @@
 
 ## Introduction
 
-`capture-metrics` is a small library to help pass properties to your analytics via context.
+`capture-metrics` is a small **react** library to help pass properties to your analytics via context.
 
 The problem it solves is probably best demonstrated in an example. (Or check out the [Code Sandbox](https://www.google.com))
 
@@ -27,11 +27,12 @@ The problem it solves is probably best demonstrated in an example. (Or check out
   <button onClick={analytics.track('Add to cart')}>
     Add to cart
   </button>
-```
 
-> But you also want to know which product, by which user, on which page, in which variant of an a/b test and more
+  // But you also want to know which product, 
+  // by which user, 
+  // on which page, 
+  // in which variant of an a/b test and more
 
-```javascript
   <button onClick={analytics.track('Add to cart', {
     user: { /* user props */ },
     variantId,
@@ -46,8 +47,21 @@ The problem it solves is probably best demonstrated in an example. (Or check out
 
 All those extra properties would lead to a lot of prop-drilling or superfluous use of react context. This solves that problem.
 
-Instead, we add properties throughout the virtual DOM and properties get passed down to nested components via context. It sort of imitates [Event bubbling and capture](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture). Hence, the name - we are capturing properties down the DOM tree hierarchy.  
+Instead, we add properties throughout the virtual DOM and properties get passed down to nested components via context. It sort of imitates [Event bubbling and capture](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture). Hence, the name - we are capturing properties down the DOM tree hierarchy. 
 
+For example:
+- Get `utmCode` from `app.tsx`
+- Get `sessionId` from `auth.tsx`
+- Get `user` from `user.tsx` 
+- Get `variantId` from `page.tsx`
+
+Then in your `button` you only have to call:
+ 
+```
+<button onClick={analytics.track('Add to cart')}>
+  Add to cart
+</button>
+```
 
 ## Example
 [Code Sandbox](https://www.google.com)

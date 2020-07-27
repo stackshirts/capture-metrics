@@ -1,6 +1,6 @@
 {
   "name": "capture-metrics",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React library for propagating analytics event properties",
   "main": "./dist/index.js",
   "module": "./esm/index.js",
