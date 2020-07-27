@@ -3,7 +3,7 @@
 <br />
 
 <p align="center">
-  <a aria-label="NPM version" href="https://www.npmjs.com/package/captuer-metrics">
+  <a aria-label="NPM version" href="https://www.npmjs.com/package/react-capture-metrics">
     <img alt="" src="https://badgen.net/npm/v/react-capture-metrics">
   </a>
   <a aria-label="Package size" href="https://bundlephobia.com/result?p=react-capture-metrics">
@@ -15,7 +15,8 @@
 </p>
 
 
-Table of Contents:
+## Table of Contents:
+- [Introduction](#introduction)
 - [Example](https://codesandbox.io/s/github/stackshirts/react-capture-metrics/tree/master/examples/with-nextjs)
 - [Quick Start](#Quick Start)
 - [Mount MetricsProvider](#Mount MetricsProvider)
