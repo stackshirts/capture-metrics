@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { AnalyticsType, MetricsProvider } from 'capture-metrics';
+import { AnalyticsType, MetricsProvider } from 'react-capture-metrics';
 import { useEffect, useState } from 'react';
 import Sidebar, { Item } from '../components/sidebar';
 

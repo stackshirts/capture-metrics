@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useMetrics } from 'capture-metrics';
+import { useMetrics } from 'react-capture-metrics';
 import Card from '../components/card';
 
 export default function Home() {

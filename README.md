@@ -1,22 +1,22 @@
-# `capture-metrics`
+# `react-capture-metrics`
 
 <br />
 
 <p align="center">
   <a aria-label="NPM version" href="https://www.npmjs.com/package/captuer-metrics">
-    <img alt="" src="https://badgen.net/npm/v/capture-metrics">
+    <img alt="" src="https://badgen.net/npm/v/react-capture-metrics">
   </a>
-  <a aria-label="Package size" href="https://bundlephobia.com/result?p=capture-metrics">
-    <img alt="" src="https://badgen.net/bundlephobia/minzip/capture-metrics">
+  <a aria-label="Package size" href="https://bundlephobia.com/result?p=react-capture-metrics">
+    <img alt="" src="https://badgen.net/bundlephobia/minzip/react-capture-metrics">
   </a>
   <a aria-label="License" href="https://github.com/zeit/swr/blob/master/LICENSE">
-    <img alt="" src="https://badgen.net/npm/license/capture-metrics">
+    <img alt="" src="https://badgen.net/npm/license/react-capture-metrics">
   </a>
 </p>
 
 
 Table of Contents:
-- [Example](https://codesandbox.io/s/github/stackshirts/capture-metrics/tree/master/examples/with-nextjs)
+- [Example](https://codesandbox.io/s/github/stackshirts/react-capture-metrics/tree/master/examples/with-nextjs)
 - [Quick Start](#Quick Start)
 - [Mount MetricsProvider](#Mount MetricsProvider)
 - [useMetrics](#useMetrics)
@@ -27,9 +27,9 @@ Table of Contents:
 
 ## Introduction
 
-The `capture-metrics` package is a small **react** library to help pass properties to your analytics via context.
+The `react-capture-metrics` package is a small **react** library to help pass properties to your analytics via context.
 
-The problem it solves is probably best demonstrated in an example. (Or check out the [Code Sandbox](https://codesandbox.io/s/github/stackshirts/capture-metrics/tree/master/examples/with-nextjs))
+The problem it solves is probably best demonstrated in an example. (Or check out the [Code Sandbox](https://codesandbox.io/s/github/stackshirts/react-capture-metrics/tree/master/examples/with-nextjs))
 
 ```javascript
   // Deep down at the most granular level of your react app
@@ -75,26 +75,26 @@ Then in your `button` you only have to call:
 ```
 
 ## Example
-[Code Sandbox](https://codesandbox.io/s/github/stackshirts/capture-metrics/tree/master/examples/with-nextjs)
+[Code Sandbox](https://codesandbox.io/s/github/stackshirts/react-capture-metrics/tree/master/examples/with-nextjs)
 
 ## Quick Start
 
 Inside your React project directory, run the following:
 
 ```
-yarn add capture-metrics
+yarn add react-capture-metrics
 ```
 
 Or with npm:
 
 ```
-npm install capture-metrics
+npm install react-capture-metrics
 ```
 
 ## Mount MetricsProvider
 
 ```js
-import { MetricsProvider } from 'capture-metrics'
+import { MetricsProvider } from 'react-capture-metrics'
 
 const analytics = {
   track: (name, properties) => window.analytics.track(name, properties),
@@ -110,14 +110,14 @@ function App () {
 }
 ```
 
-In the above example, an analytics object (with `track` and `page` methods) that conforms to the `capture-metrics` spec, and translates to the Segment API specification. 
+In the above example, an analytics object (with `track` and `page` methods) that conforms to the `react-capture-metrics` spec, and translates to the Segment API specification. 
 
 ** Note that `analytics` should be defined outside of component or via a `ref` because `MetricsProvider` will not watch for updates.
 
 ## useMetrics()
 
 ```js
-import { useMetrics } from 'capture-metrics';
+import { useMetrics } from 'react-capture-metrics';
 
 function Page() {
   const { 

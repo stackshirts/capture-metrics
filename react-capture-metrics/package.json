@@ -1,5 +1,5 @@
 {
-  "name": "capture-metrics",
+  "name": "react-capture-metrics",
   "version": "1.0.1",
   "description": "React library for propagating analytics event properties",
   "main": "./dist/index.js",
