@@ -14,8 +14,14 @@
     ]
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lerna:version": "lerna version --conventional-commits --yes",
+    "delete-version:local": "git tag -d $(git tag -l --contains HEAD)",
+    "delete-version:remote": "git push --delete origin $(git tag -l --contains HEAD)"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
 }
