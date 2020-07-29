@@ -125,7 +125,6 @@ function Page() {
     analytics,
     Capture,
     PageView,
-    ready,
   } = useMetrics({ 
     // ...properties to pass down
   })
@@ -135,14 +134,11 @@ function Page() {
 #### Parameters
 
 - `properties`: all properties you want to "inject" into the DOM hierarchy (using the `Capture` or `PageView` components that get returned)
-- `config`: (_optional_) 
-    - `ready`: (_optional_) `boolean` to defer any PageView events until parent properties have been determined.
 
 #### Return Values
 - `analytics`: data for the given key resolved by `fetcher` (or undefined if not loaded)  
 - `Capture`: data for the given key resolved by `fetcher` (or undefined if not loaded)  
 - `PageView`: error thrown by `fetcher` (or undefined)  
-- `ready`: if there's a request or revalidation loading  
 
 
 ## PageView
@@ -170,6 +166,9 @@ This will call `analytics.page()` when it is rendered (in a `useEffect`). Note t
 
 PageView is also similar to the `Capture` component in that it captures all properties in context to be used deeper in the (virtual) DOM tree.
 
+#### properties
+- `ready`: `boolean` to defer any PageView events until all appropriate properties have been determined. (See note below)[#about-ready]
+
 ## Capture
 
 ```js
@@ -180,7 +179,7 @@ function Card({ productId }) {
     // ...properties to capture  
   })
   return (
-    <Capture>
+    <Capture ready={/* (optional) */}>
       // ...
     </Capture>
   )  
@@ -188,6 +187,13 @@ function Card({ productId }) {
 ```
 
 This will capture all the properties provided to `useMetrics` and pass them via context to any nested calls to `useMetrics`.
+
+#### properties
+- `ready`: `boolean` to defer any PageView events until all appropriate properties have been determined.
+
+
+##### About `ready`
+> NOTE: The `ready` prop used on the `Capture` component will **only apply** to any nested `PageView` components. The `PageView` component will only call `analytics.page()` when the `ready` prop on `PageView` (itself) and all captured `ready` values above it in the virtual DOM are true.
 
 ## analytics
 
