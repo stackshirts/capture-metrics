@@ -6,6 +6,7 @@ export const voidAnalytics = {
   track: () => undefined,
 }
 
+export const ReadyContext = createContext<boolean>(true);
 export const MetricsContext = createContext<MetricsType>({
   analytics: voidAnalytics,
   properties: {}

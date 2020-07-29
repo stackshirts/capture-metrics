@@ -7,7 +7,11 @@ const analytics = {
   track: jest.fn(),
 }
 
-const CallTrackOnUpdate: React.FC = () => {
+afterEach(() => {
+  jest.resetAllMocks()
+})
+
+const TrackOnClick: React.FC = () => {
   const { analytics } = useMetrics()
   const ref = useRef(0);
 
@@ -18,7 +22,7 @@ const CallTrackOnUpdate: React.FC = () => {
         analytics.track('updated', { count: ref.current })
       }}
     >
-      Child
+      TrackOnClick
     </button>
   );
 }
@@ -46,19 +50,84 @@ describe('props updated when changed in MetricsProvider', () => {
 
     rtl.render(
       <Test>
-        <CallTrackOnUpdate />
+        <TrackOnClick />
       </Test>
     );
 
-    rtl.fireEvent.click(rtl.screen.getByText(/Child/i))
+    rtl.fireEvent.click(rtl.screen.getByText(/TrackOnClick/i))
 
     expect(analytics.track.mock.calls[0]).toMatchSnapshot();
 
     rtl.fireEvent.click(rtl.screen.getByText(/Provider/i))
-    rtl.fireEvent.click(rtl.screen.getByText(/Child/i))
+    rtl.fireEvent.click(rtl.screen.getByText(/TrackOnClick/i))
     expect(rtl.screen.getByTestId(/parentCount/i).textContent).toEqual('1')
 
     expect(analytics.track.mock.calls[1]).toMatchSnapshot();
+
+  })
+})
+
+
+const TestReady: React.FC = ({ children }) => {
+
+  const { Capture } = useMetrics({ TestReady: 'props' })
+  const [ready, setReady] = useState(false);
+
+  return (
+    <Capture ready={ready}>
+      <button onClick={() => setReady(true)}>
+        TestReady
+      </button>
+      {children}
+    </Capture>
+  )
+}
+
+const TestPageView: React.FC = ({ children }) => {
+
+  const { PageView } = useMetrics({ TestPageView: 'props' })
+
+  return (
+    <PageView name="Page" category="Category" properties={{ PageView: 'props' }}>
+      {children}
+    </PageView>
+  )
+}
+
+describe('only calls page() when ready', () => {
+  it('works', () => {
+
+    rtl.render(
+      <Test>
+        <TestReady>
+          <TestPageView />
+        </TestReady>
+      </Test>
+    );
+
+    expect(analytics.page).toHaveBeenCalledTimes(0);
+    rtl.fireEvent.click(rtl.screen.getByText(/TestReady/i))
+    expect(analytics.page).toHaveBeenCalledTimes(1);
+
+  })
+})
+
+describe('PageView will capture props in useMetrics and on itself', () => {
+  it('works', () => {
+
+    rtl.render(
+      <Test>
+        <TestReady>
+          <TestPageView>
+            <TrackOnClick />
+          </TestPageView>
+        </TestReady>
+      </Test>
+    );
+
+    rtl.fireEvent.click(rtl.screen.getByText(/TrackOnClick/i))
+
+    expect(analytics.track.mock.calls[0]).toMatchSnapshot();
 
   })
 })
