@@ -16,7 +16,6 @@ export interface AnalyticsType {
 export interface MetricsType {
   properties: object,
   analytics: AnalyticsType,
-  ready: boolean,
 }
 
 export type MetricsRef = MutableRefObject<MetricsType>

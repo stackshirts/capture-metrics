@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { MetricsContext } from './MetricsProvider';
+import { MetricsContext, voidAnalytics } from './MetricsProvider';
 import { AnalyticsType, MetricsType, PageViewInstanceProps, PageViewProps } from 'src/types';
 
 const PageView: React.FC<PageViewInstanceProps> = (props) => {
@@ -8,18 +8,15 @@ const PageView: React.FC<PageViewInstanceProps> = (props) => {
     name,
     properties,
     category,
-    ready = true,
     pageKey,
     analytics,
     children = null,
   } = props
 
   useEffect(() => {
-    if (ready) {
-      analytics.page(name, properties, category)
-    }
+    analytics.page(name, properties, category)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [analytics, ready, pageKey])
+  }, [analytics, pageKey])
 
   return (
     <>
@@ -28,53 +25,33 @@ const PageView: React.FC<PageViewInstanceProps> = (props) => {
   );
 }
 
-interface Config {
-  ready?: boolean;
-}
+export default function useMetrics(properties: object = {}) {
 
-export default function useMetrics(hookProps: object = {}, config: Config = {}) {
+  const parentMetrics = useContext(MetricsContext);
 
-  const {
-    ready,
-  } = config;
-
-  const {
-    analytics: originalAnalytics,
-    properties: inheritedProps,
-    ready: inheritedReady,
-  } = useContext(MetricsContext);
-
-  const metrics: MetricsType = {
-    analytics: originalAnalytics,
-    properties: {
-      ...inheritedProps,
-      ...hookProps,
+  // think of this like a node in an n-tree
+  const metricsRef = useRef<MetricsType>({
+    analytics: {
+      track: (name, bubbledProps) => {
+        parentMetrics.analytics.track(name, {
+          ...metricsRef.current.properties,
+          ...bubbledProps
+        })
+      },
+      page: (name, bubbledProps, category) => {
+        parentMetrics.analytics.page(name, {
+          ...metricsRef.current.properties,
+          ...bubbledProps
+        }, category)
+      }
     },
-    ready: inheritedReady && ready,
-  }
-
-  const metricsRef = useRef<MetricsType>(metrics)
-  Object.assign(metricsRef.current, metrics);
-
-  // These are only useful at this exact level in DOM heirarchy
-  const { current: capturedAnalytics } = useRef<AnalyticsType>({
-    track: (name, imperativeProps) => {
-      originalAnalytics.track(name, {
-        ...metricsRef.current.properties,
-        ...imperativeProps
-      })
-    },
-    page: (name, imperativeProps, category) => {
-      originalAnalytics.page(name, {
-        ...metricsRef.current.properties,
-        ...imperativeProps
-      }, category)
-    }
+    properties,
   })
+  Object.assign(metricsRef.current, { properties })
 
-  const pvRef = useRef<MetricsType>(metrics);
+  const pageViewAnalyticsRef = useRef<AnalyticsType>(voidAnalytics)
 
-  // if (!) {
+  // if (!metricsProvided) {
   //   throw new Error('AddProperties must be nested within MetricsProvider')
   // }
 
@@ -86,24 +63,38 @@ export default function useMetrics(hookProps: object = {}, config: Config = {}) 
     )
   }, [])
 
+
   const PageViewInstance = React.useMemo((): React.FC<PageViewProps> => (props) => {
     const {
       children,
-      name,
-      category,
-      properties, // even more properties can be put on <PageView />
-      ready,
+      name: pageName,
+      category: pageCategory,
     } = props
 
-    Object.assign(pvRef.current.properties, {
-      pageName: name,
-      pageCategory: category,
-      ...properties,
-    });
+    Object.assign(pageViewAnalyticsRef.current, {
+      track: (name, bubbledProps = {}) => {
+        parentMetrics.analytics.track(name, {
+          ...metricsRef.current.properties,
+          ...properties,
+          ...bubbledProps,
+          pageName,
+          pageCategory,
+        })
+      },
+      page: (name, bubbledProps = {}, category) => {
+        parentMetrics.analytics.page(name, {
+          ...metricsRef.current.properties,
+          ...properties,
+          ...bubbledProps,
+          pageName,
+          pageCategory,
+        }, category)
+      }
+    } as AnalyticsType)
 
     return (
-      <PageView ready={metrics.ready && ready} analytics={capturedAnalytics} {...props}>
-        <MetricsContext.Provider value={pvRef.current}>
+      <PageView analytics={metricsRef.current.analytics} {...props}>
+        <MetricsContext.Provider value={metricsRef.current}>
           {children}
         </MetricsContext.Provider>
       </PageView>
@@ -111,9 +102,8 @@ export default function useMetrics(hookProps: object = {}, config: Config = {}) 
   }, [])
 
   return {
-    analytics: capturedAnalytics,
+    analytics: metricsRef.current.analytics,
     Capture,
     PageView: PageViewInstance,
-    ready,
   }
 }

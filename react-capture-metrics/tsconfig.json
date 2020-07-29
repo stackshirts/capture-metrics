@@ -10,7 +10,7 @@
       "esnext"
     ],
     "inlineSourceMap": true,
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
@@ -28,11 +28,15 @@
       "node",
       "jest"
     ],
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
-  "exclude": [
-    "**/*.test.tsx"
-  ],
   "include": [
     "src"
   ]

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`props updated when changed in MetricsProvider works 1`] = `
+Array [
+  "updated",
+  Object {
+    "count": 1,
+    "parentCount": 0,
+  },
+]
+`;
+
+exports[`props updated when changed in MetricsProvider works 2`] = `
+Array [
+  "updated",
+  Object {
+    "count": 2,
+    "parentCount": 1,
+  },
+]
+`;
