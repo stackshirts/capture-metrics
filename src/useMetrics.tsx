@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { MetricsContext, ReadyContext, voidAnalytics } from './MetricsProvider';
 import { AnalyticsType, MetricsType, PageViewInstanceProps, PageViewProps } from 'src/types';
 
@@ -16,14 +16,11 @@ const PageView: React.FC<PageViewInstanceProps> = (props) => {
 
   const allReady = useContext(ReadyContext) && ready
 
-  const callPage = useCallback(() => {
-    analytics.page(name, properties, category)
-  }, [analytics, name, properties, category])
-
   useEffect(() => {
     if (allReady) {
-      callPage();
+      analytics.page(name, properties, category)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageKey, allReady])
 
   return (
