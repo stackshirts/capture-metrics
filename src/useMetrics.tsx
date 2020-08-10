@@ -103,7 +103,6 @@ export default function useMetrics(properties: object = {}) {
         track: (name, bubbledProps = {}) => {
           capturedMetrics.analytics.track(name, {
             ...metricsRef.current.properties,
-            ...properties,
             ...bubbledProps,
             pageName,
             pageCategory,
@@ -112,7 +111,6 @@ export default function useMetrics(properties: object = {}) {
         page: (name, bubbledProps = {}, category) => {
           capturedMetrics.analytics.page(name, {
             ...metricsRef.current.properties,
-            ...properties,
             ...bubbledProps,
             pageName,
             pageCategory,
@@ -128,7 +126,7 @@ export default function useMetrics(properties: object = {}) {
         </MetricsContext.Provider>
       </PageView>
     )
-  }, [capturedMetrics, properties])
+  }, [capturedMetrics])
 
   return {
     analytics: metricsRef.current.analytics,

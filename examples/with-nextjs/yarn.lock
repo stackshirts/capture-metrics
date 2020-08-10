@@ -4527,10 +4527,10 @@ randomfill@^1.0.3:
     randombytes "^2.0.5"
     safe-buffer "^5.1.0"
 
-react-capture-metrics@latest:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/react-capture-metrics/-/react-capture-metrics-1.0.3.tgz#fba08f609768e3e78f291574bffce0abe9ebe784"
-  integrity sha512-aAtRmUGRPMjz/Y07euYb6XpXcW/pqn7j4miqkyCgxr2qk1ORYtdxcE2qWwgSLwxp6mxF01dpeAsi3QGvCDuRtg==
+react-capture-metrics@^1.0.4-canary.0:
+  version "1.0.4-canary.0"
+  resolved "https://registry.yarnpkg.com/react-capture-metrics/-/react-capture-metrics-1.0.4-canary.0.tgz#c1ac81193ed236b1491925aff6ff4577fe66efba"
+  integrity sha512-dOYW75YMiROcP65y2xFrgGNMtbNsYUplKN7oVyBv1Ol4hfqZVO057eWrsnmpInJ2Y8KU2g9Sa3MrJXi+KDNvCQ==
 
 react-dom@16.13.1:
   version "16.13.1"
