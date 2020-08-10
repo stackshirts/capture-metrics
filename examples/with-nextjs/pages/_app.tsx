@@ -1,6 +1,6 @@
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AnalyticsType, MetricsProvider } from 'react-capture-metrics';
-import { useEffect, useState } from 'react';
 import Sidebar, { Item } from '../components/sidebar';
 
 export default function MyApp({ Component, pageProps }) {

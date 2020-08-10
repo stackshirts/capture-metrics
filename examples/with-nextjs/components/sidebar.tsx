@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const config = { tension: 125, friction: 20, precision: 0.1 }
-const timeout = 3000
-
 export interface Item {
   type: 'page' | 'track';
   name: string;
@@ -30,7 +27,7 @@ const Sidebar: React.FC<Props> = (props) => {
   }, [items])
 
   return (
-    <div className="sidebar" style={{ transform: isOpen ? 'translateX(0)' : 'translateX(235px)'}}>
+    <div className="sidebar" style={{ transform: isOpen ? 'translateX(0)' : 'translateX(235px)' }}>
       <div className="header">
         <button onClick={() => setOpen(!isOpen)}>
           {isOpen ? <>&rarr;</> : <>&larr;</>}

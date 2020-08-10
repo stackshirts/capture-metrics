@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import { MetricsContext, ReadyContext, voidAnalytics } from './MetricsProvider';
 import { AnalyticsType, MetricsType, PageViewInstanceProps, PageViewProps } from 'src/types';
 
@@ -14,14 +14,17 @@ const PageView: React.FC<PageViewInstanceProps> = (props) => {
     ready = true,
   } = props;
 
-  const sumReady = useContext(ReadyContext) && ready
+  const allReady = useContext(ReadyContext) && ready
+
+  const callPage = useCallback(() => {
+    analytics.page(name, properties, category)
+  }, [name, properties, category])
 
   useEffect(() => {
-    if (sumReady) {
-      analytics.page(name, properties, category)
+    if (allReady) {
+      callPage();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [analytics, pageKey, sumReady])
+  }, [pageKey, allReady])
 
   return (
     <>
@@ -30,10 +33,10 @@ const PageView: React.FC<PageViewInstanceProps> = (props) => {
   );
 }
 
-const CaptureReady: React.FC<{ready : boolean}> = ({ ready, children }) => {
-  const sumReady = useContext(ReadyContext) && ready;
+const CaptureReady: React.FC<{ ready: boolean }> = ({ ready, children }) => {
+  const allReady = useContext(ReadyContext) && ready;
   return (
-    <ReadyContext.Provider value={sumReady}>
+    <ReadyContext.Provider value={allReady}>
       {children}
     </ReadyContext.Provider>
   )
@@ -73,7 +76,7 @@ export default function useMetrics(properties: object = {}) {
   // }
 
   const Capture = React.useMemo((): React.FC<{ ready?: boolean }> => ({ children, ready }) => {
-    
+
     if (typeof ready === 'boolean') {
       return (
         <MetricsContext.Provider value={metricsRef.current}>
@@ -98,26 +101,24 @@ export default function useMetrics(properties: object = {}) {
       category: pageCategory,
     } = props
 
-    Object.assign(pageViewRef.current, {
-      analytics: {
-        track: (name, bubbledProps = {}) => {
-          capturedMetrics.analytics.track(name, {
-            ...metricsRef.current.properties,
-            ...bubbledProps,
-            pageName,
-            pageCategory,
-          })
-        },
-        page: (name, bubbledProps = {}, category) => {
-          capturedMetrics.analytics.page(name, {
-            ...metricsRef.current.properties,
-            ...bubbledProps,
-            pageName,
-            pageCategory,
-          }, category)
-        }
-      } as AnalyticsType
-    })
+    Object.assign(pageViewRef.current.analytics, {
+      track: (name, bubbledProps = {}) => {
+        capturedMetrics.analytics.track(name, {
+          ...metricsRef.current.properties,
+          ...bubbledProps,
+          pageName,
+          pageCategory,
+        })
+      },
+      page: (name, bubbledProps = {}, category) => {
+        capturedMetrics.analytics.page(name, {
+          ...metricsRef.current.properties,
+          ...bubbledProps,
+          pageName,
+          pageCategory,
+        }, category)
+      }
+    } as AnalyticsType)
 
     return (
       <PageView analytics={pageViewRef.current.analytics} {...props}>

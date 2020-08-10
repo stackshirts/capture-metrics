@@ -1,3 +1,4 @@
+import React from 'react';
 import Head from 'next/head';
 import Card from '../components/card';
 import { useMetrics } from 'react-capture-metrics';
@@ -10,7 +11,7 @@ export default function Home() {
       src: 'pages/index.tsx'
     },
   })
-
+  
   return (
     <div className="container">
       <Head>

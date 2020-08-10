@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { useMetrics } from 'react-capture-metrics';
 import Vote from '../components/vote';
 

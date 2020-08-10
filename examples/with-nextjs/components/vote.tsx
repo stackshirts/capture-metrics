@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useMetrics } from 'react-capture-metrics';
 
 const globalVotes = {
