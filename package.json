@@ -1,6 +1,6 @@
 {
   "name": "react-capture-metrics",
-  "version": "1.0.4-canary.0",
+  "version": "1.0.4-canary.1",
   "description": "React library for passing more properties to your analytics events",
   "main": "./dist/index.js",
   "module": "./esm/index.js",
