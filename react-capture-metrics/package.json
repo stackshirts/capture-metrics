@@ -1,9 +1,10 @@
 {
   "name": "react-capture-metrics",
   "version": "1.0.2",
-  "description": "React library for propagating analytics event properties",
+  "description": "React library for passing more properties to your analytics events",
   "main": "./dist/index.js",
   "module": "./esm/index.js",
+  "homepage": "https://github.com/stackshirts/react-capture-metrics/",
   "react-native": "./esm/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -33,24 +34,23 @@
       "git add"
     ]
   },
-  "author": "",
+  "author": "Morgan Intrator",
   "license": "ISC",
   "peerDependencies": {
     "react": "^16.11.0"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.7",
+    "@types/node": "^14.0.26",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
     "@testing-library/jest-dom": "4.2.4",
     "@testing-library/react": "^10.2.1",
     "@zeit/ncc": "0.20.5",
     "husky": "2.4.1",
     "lint-staged": "8.2.1",
-    "react-scripts": "^3.4.1"
-  },
-  "dependencies": {
-    "@types/jest": "^26.0.7",
-    "@types/node": "^14.0.26",
-    "@types/react": "^16.9.43",
-    "@types/react-dom": "^16.9.8",
+    "react-scripts": "^3.4.1",
     "typescript": "^3.9.7"
-  }
+  },
+  "dependencies": {}
 }
