@@ -18,7 +18,7 @@ const PageView: React.FC<PageViewInstanceProps> = (props) => {
 
   const callPage = useCallback(() => {
     analytics.page(name, properties, category)
-  }, [name, properties, category])
+  }, [analytics, name, properties, category])
 
   useEffect(() => {
     if (allReady) {

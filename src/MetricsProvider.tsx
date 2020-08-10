@@ -23,6 +23,7 @@ const MetricsProvider: React.FC<Props> = (props) => {
     children,
     analytics,
     properties = {},
+    ready = true,
   } = props
 
   if (!analytics) {
@@ -56,7 +57,9 @@ const MetricsProvider: React.FC<Props> = (props) => {
 
   return (
     <MetricsContext.Provider value={metricsRef.current}>
-      {children}
+      <ReadyContext.Provider value={ready}>
+        {children}
+      </ReadyContext.Provider>
     </MetricsContext.Provider>
   );
 }
