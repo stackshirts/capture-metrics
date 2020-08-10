@@ -128,7 +128,7 @@ export default function useMetrics(properties: object = {}) {
         </MetricsContext.Provider>
       </PageView>
     )
-  }, [])
+  }, [capturedMetrics, properties])
 
   return {
     analytics: metricsRef.current.analytics,
