@@ -24,6 +24,7 @@
     - [PageView](#pageview)
     - [Capture](#capture)
     - [analytics](#analytics)
+- [Contributing](#contributing)
 
 
 ## Introduction
@@ -234,3 +235,12 @@ function LandingPage() {
   }, [])
 }
 ```
+
+
+## Contributing
+
+- Use conventional commits
+- Run `yarn test` and `yarn lint`
+- `npm version patch/minor/major`
+- `npm publish`
+- Then push to git remote

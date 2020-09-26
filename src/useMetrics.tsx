@@ -61,6 +61,7 @@ export default function useMetrics(properties: object = {}) {
     },
     properties,
   })
+  // Keep properties equal to latest
   Object.assign(metricsRef.current, { properties })
 
   const pageViewRef = useRef<MetricsType>({

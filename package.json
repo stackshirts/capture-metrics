@@ -28,13 +28,6 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "npm run lint:fix",
-      "npm run format",
-      "git add"
-    ]
-  },
   "author": "Morgan Intrator",
   "license": "ISC",
   "peerDependencies": {

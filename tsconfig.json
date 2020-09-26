@@ -9,7 +9,8 @@
       "dom.iterable",
       "esnext"
     ],
-    "inlineSourceMap": true,
+    "sourceMap": true,
+    "inlineSources": true,
     "module": "esnext",
     "moduleResolution": "node",
     "noEmitOnError": true,
